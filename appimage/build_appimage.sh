@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 find / -name FlexLexer.h
-echo $(lsb_release -a)
 apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y tzdata sudo gcc g++ wget flex bison libboost-all-dev automake make cmake iputils-ping build-essential libtool 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib:/lib
+ldconfig
+echo $(lsb_release -a)
 
 # ./bootstrap
 # ./configure --prefix=$(pwd)/server-bin
