@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+sudo apt-get update && sudo apt-get install -y tzdata sudo gcc g++ wget flex bison libboost-all-dev automake make cmake iputils-ping
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib:/lib
 
 ./bootstrap
