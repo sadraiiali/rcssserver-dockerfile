@@ -11,7 +11,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib:/lib
 
 mkdir build
 cd build
-cmake ..
+cmake -DCMAKE_CXX_STANDARD=17 ..
 make
 
 
