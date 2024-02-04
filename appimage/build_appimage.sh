@@ -9,7 +9,7 @@ mkdir rcssserver-x86_64
                                 -e ./build/rcssserver \
                                 -l ./build/rcss/clang/librcssclangparser.so.18.0.0 \
                                 -l ./build/rcss/conf/librcssconfparser.so.18.0.0 \
-                                -l ./build/rcss/gzip/librcssgz.so.18.0.0 \
+                                -l ./build/rcss/gzip/librcssgz.so.1.0.0 \
                                 -l ./build/rcss/net/librcssnet.so.1.0.0 \
                                 -l /usr/lib/libc.so.6 \
                                 -l /usr/lib/libz.so.1 \
