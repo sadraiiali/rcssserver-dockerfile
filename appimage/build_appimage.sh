@@ -5,6 +5,7 @@ wget -c "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous
 chmod +x linuxdeploy-x86_64.AppImage
 mkdir rcssserver-x86_64
 echo $(pwd)
+ls -la
 ./linuxdeploy-x86_64.AppImage --appdir ./rcssserver-x86_64 \
                                 -e ./build/rcssserver \
                                 -l ./build/clang/librcssclangparser.so.18.0.0 \
