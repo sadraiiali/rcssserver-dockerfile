@@ -3,7 +3,7 @@ set -e
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib:/lib
 
 ./bootstrap
-./configure --prefix=`pwd`/server-bin
+./configure --prefix=$(pwd)/server-bin
 make
 make install
 
