@@ -23,4 +23,3 @@ LIBZ_PATH=$(ldd ./build/rcssserver | grep libz.so | awk '{ print $3 }')
                                 -i ./appimage/rcssserver.png \
                                 --output appimage 
 echo "App Image Created."
-mv rcssserver-*AppImage rcssserver-x86_64.AppImage
