@@ -16,7 +16,6 @@ LIBZ_PATH=$(ldd ./build/rcssserver | grep libz.so | awk '{ print $3 }')
                                 -l ./build/rcss/conf/librcssconfparser.so.18.0.0 \
                                 -l ./build/rcss/gzip/librcssgz.so.1.0.0 \
                                 -l ./build/rcss/net/librcssnet.so.1.0.1 \
-                                -l $LIBC_PATH \
                                 -l $LIBSTDCPP_PATH \
                                 -l $LIBZ_PATH \
                                 -d ./appimage/rcssserver.desktop \
