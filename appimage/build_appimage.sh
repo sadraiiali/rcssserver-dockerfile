@@ -5,7 +5,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib:/lib
 ldconfig
 find / -name FlexLexer.h
 
-# ./bootstrap
+# ./bootstrap 
 # ./configure --prefix=$(pwd)/server-bin
 # make
 # make install
