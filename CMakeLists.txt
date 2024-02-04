@@ -34,6 +34,12 @@ check_include_file_cxx("unistd.h" HAVE_UNISTD_H)
 check_include_file_cxx("poll.h" HAVE_POLL_H)
 check_include_file_cxx("pwd.h" HAVE_PWD_H)
 
+
+# TODO: fix missing include FlexLexer.h
+include_directories(/usr/include)
+
+
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake config.h)
 
 add_subdirectory(rcss)
