@@ -35,13 +35,12 @@ jobs:
           tags: "${{ env.BASE_IMAGE }}:latest"
 
       - name: Docker Hub Description
-        if: needs.check.outputs.base_readme_changed == 'true'
         uses: peter-evans/dockerhub-description@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: ${{ env.BASE_IMAGE }}
-          readme-filepath: docker/README.docker.md
+          readme-filepath: docker/README.md
           short-description: "RoboCup Soccer Simulator Server"
   
   app-image:
