@@ -50,10 +50,13 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: install Dependency
-        run: sudo apt-get update && DEBIAN_FRONTEND="noninteractive" sudo apt-get install -y tzdata gcc g++ wget libfl-dev flex bison libboost-all-dev automake make cmake iputils-ping build-essential libtool 
+        run: sudo apt-get update && DEBIAN_FRONTEND="noninteractive" sudo apt-get install -y tzdata gcc g++ wget libfl-dev flex bison libboost-all-dev automake make cmake iputils-ping build-essential libtool libfuse libfuse-dev
       
-      - name: Build
-        run: sudo ./appimage/build_appimage.sh
+      - name: Build Server
+        run: sudo appimage/build_code.sh
+
+      - name: Build AppImage
+        run: sudo appimage/build_appimage.sh
         
       - name: Archive Binary
         uses: actions/upload-artifact@v1

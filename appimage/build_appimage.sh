@@ -1,19 +1,5 @@
 #!/bin/bash
 set -e
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib:/lib
-ldconfig
-find / -name FlexLexer.h
-
-# ./bootstrap 
-# ./configure --prefix=$(pwd)/server-bin
-# make
-# make install
-
-mkdir build
-cd build
-cmake -DCMAKE_CXX_STANDARD=17 ..
-make
-
 
 wget -c "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage" -O linuxdeploy-x86_64.AppImage
 chmod +x linuxdeploy-x86_64.AppImage
