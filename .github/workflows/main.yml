@@ -49,8 +49,8 @@ jobs:
     
       - uses: actions/checkout@v4
       
-      # - name: install Dependency
-      #   run: sudo apt-get update && sudo apt-get install -y tzdata sudo gcc g++ wget flex bison libboost-all-dev automake make cmake iputils-ping
+      - name: install Dependency
+        run: sudo apt-get update && DEBIAN_FRONTEND="noninteractive" sudo apt-get install -y tzdata gcc g++ wget libfl-dev flex bison libboost-all-dev automake make cmake iputils-ping build-essential libtool 
       
       - name: Build
         run: sudo ./appimage/build_appimage.sh
