@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y tzdata sudo gcc g++ wget flex bison libboost-all-dev automake make cmake iputils-ping build-essential libtool 
+apt purge -y flex
+apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y tzdata gcc g++ wget flex bison libboost-all-dev automake make cmake iputils-ping build-essential libtool 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib:/lib
 ldconfig
 find / -name FlexLexer.h
