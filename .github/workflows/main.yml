@@ -65,9 +65,9 @@ jobs:
           path: ./rcssserver-x86_64.AppImage
       
       # release the artifact
-      - name: Release Artifact
-        uses: softprops/action-gh-release@v0.1.15
+      - uses: ncipollo/release-action@v1
         with:
-          files: ./rcssserver-x86_64.AppImage
+          artifacts: "./rcssserver-x86_64.AppImage"
           token: ${{ secrets.GITHUB_TOKEN }}
-          body: "Release"
+
+          
