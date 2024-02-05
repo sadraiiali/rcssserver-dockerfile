@@ -70,5 +70,4 @@ jobs:
         with:
           files: ./rcssserver-x86_64.AppImage
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ github.ref }}
-          body: "Release of ${{ github.ref }}"
+          body: "Release"
