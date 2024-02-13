@@ -54,6 +54,6 @@ WORKDIR /app
 
 COPY --from=BUILD /rcssserver/server-bin /app/server-bin
 
-COPY docker/docker-entrypoint.sh /app/docker-entrypoint.sh
+COPY utils/docker/docker-entrypoint.sh /app/docker-entrypoint.sh
 
 CMD [ "bash", "/app/docker-entrypoint.sh" ]
