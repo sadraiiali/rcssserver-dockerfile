@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.5.1)
 
 project(RCSSServer VERSION 18.1.3)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -include /app/glibc_version_header/version_headers/x64/force_link_glibc_2.19.h")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include /app/glibc_version_header/version_headers/x64/force_link_glibc_2.19.h")
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -40,7 +37,6 @@ check_include_file_cxx("poll.h" HAVE_POLL_H)
 check_include_file_cxx("pwd.h" HAVE_PWD_H)
 
 
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake config.h)
 
