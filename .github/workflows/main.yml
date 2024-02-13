@@ -53,11 +53,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Build the app image
-        run: |
-          docker build -t builder:latest \
-            -f ./utils/appimage/Dockerfile.builder \
-            --privileged
-            .
+        run: docker build -t builder:latest -f ./utils/appimage/Dockerfile.builder --privileged .
         
       
       - name: Copy builded app image
