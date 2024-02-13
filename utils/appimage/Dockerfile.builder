@@ -19,7 +19,8 @@ RUN apt-get clean && apt-get update --allow-insecure-repositories && \
     build-essential \
     libtool \
     fuse \
-    libfuse-dev
+    libfuse-dev \
+    zlib1g-dev
 
 RUN cd /rcssserver && ./utils/appimage/build_code.sh
 
@@ -47,7 +48,8 @@ RUN apt-get clean && apt-get update --allow-insecure-repositories && \
     build-essential \
     libtool \
     fuse \
-    libfuse-dev
+    libfuse-dev \
+    zlib1g-dev
 
 RUN cd /rcssserver && ./utils/appimage/build_code.sh
 
