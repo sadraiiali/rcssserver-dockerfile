@@ -52,19 +52,13 @@ jobs:
     
       - uses: actions/checkout@v4
       
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+      - name: Build the app image
+        run: |
+          docker build -t builder:latest \
+            -f ./utils/appimage/Dockerfile.builder \
+            --privileged
+            .
         
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build app image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./utils/appimage/Dockerfile.builder
-          push: false
-          tags: "builder:latest"
       
       - name: Copy builded app image
         run: docker cp $(docker create builder:latest):/rcssserver-x86_64* .
