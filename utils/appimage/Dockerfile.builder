@@ -22,7 +22,12 @@ RUN apt-get clean && apt-get update --allow-insecure-repositories && \
     libfuse-dev \
     zlib1g-dev
 
-RUN cd /rcssserver && ./utils/appimage/build_code.sh
+RUN cd /rcssserver && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make -j$(nproc) && \
+    cd ..  
 
 RUN cd /rcssserver && ./utils/appimage/build_appimage.sh
 
