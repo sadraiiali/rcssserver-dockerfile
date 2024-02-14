@@ -6,6 +6,7 @@ chmod +x linuxdeploy-x86_64.AppImage
 mkdir rcssserver-x86_64
 
 BUILD_PWD='/rcssserver/build'
+APP_IMAGE_DIR='/rcssserver/utils/appimage'
 
 
 # find libc and libstdc++ libz dependencies
@@ -31,7 +32,7 @@ echo "LIBRCSSNET_PATH=" $LIBRCSSNET_PATH
                                 -l $LIBRCSSNET_PATH \
                                 -l $LIBSTDCPP_PATH \
                                 -l $LIBZ_PATH \
-                                -d ./appimage/rcssserver.desktop \
-                                -i ./appimage/rcssserver.png \
+                                -d $APP_IMAGE_DIR/rcssserver.desktop \
+                                -i $APP_IMAGE_DIR/rcssserver.png \
                                 --output appimage 
 echo "App Image Created."
