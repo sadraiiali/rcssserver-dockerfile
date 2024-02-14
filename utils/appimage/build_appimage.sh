@@ -9,17 +9,17 @@ BUILD_PWD='/rcssserver/build'
 
 
 # find libc and libstdc++ libz dependencies
-LIBSTDCPP_PATH=$(ldd $BUILD_PWD/build/rcssserver | grep libstdc++ | awk '{ print $3 }')
-LIBZ_PATH=$(ldd $BUILD_PWD/build/rcssserver | grep libz.so | awk '{ print $3 }')
-LIBRCSSCLANGPARSER_PATH=$(ldd $BUILD_PWD/build/rcssserver | grep librcssclangparser.so | awk '{ print $3 }')
-LIBRCSSCONFPARSER_PATH=$(ldd $BUILD_PWD/build/rcssserver | grep librcssconfparser.so | awk '{ print $3 }')
-LIBRCSSGZ_PATH=$(ldd $BUILD_PWD/build/rcssserver | grep librcssgz.so | awk '{ print $3 }')
-LIBRCSSNET_PATH=$(ldd $BUILD_PWD/build/rcssserver | grep librcssnet.so | awk '{ print $3 }')
+LIBSTDCPP_PATH=$(ldd $BUILD_PWD/rcssserver | grep libstdc++ | awk '{ print $3 }')
+LIBZ_PATH=$(ldd $BUILD_PWD/rcssserver | grep libz.so | awk '{ print $3 }')
+LIBRCSSCLANGPARSER_PATH=$(ldd $BUILD_PWD/rcssserver | grep librcssclangparser.so | awk '{ print $3 }')
+LIBRCSSCONFPARSER_PATH=$(ldd $BUILD_PWD/rcssserver | grep librcssconfparser.so | awk '{ print $3 }')
+LIBRCSSGZ_PATH=$(ldd $BUILD_PWD/rcssserver | grep librcssgz.so | awk '{ print $3 }')
+LIBRCSSNET_PATH=$(ldd $BUILD_PWD/rcssserver | grep librcssnet.so | awk '{ print $3 }')
 
 tree /rcssserver
 
 ./linuxdeploy-x86_64.AppImage --appdir ./rcssserver-x86_64 \
-                                -e $BUILD_PWD/build/rcssserver \
+                                -e $BUILD_PWD/rcssserver \
                                 -l $LIBRCSSCLANGPARSER_PATH \
                                 -l $LIBRCSSCONFPARSER_PATH \
                                 -l $LIBRCSSGZ_PATH \
