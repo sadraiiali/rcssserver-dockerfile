@@ -31,6 +31,6 @@ RUN cd /rcssserver && \
     find . -type f -name "*.hpp" -exec sed -i 's/std::filesystem/std::experimental::filesystem/g' {} \; && \
     mkdir build && \
     cd build && \
-    cmake -DCMAKE_CXX_STANDARD=17 .. && \
+    cmake -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_FLAGS="-lstdc++fs" .. && \
     make && \
     cd ..
