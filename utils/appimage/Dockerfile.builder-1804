@@ -29,8 +29,8 @@ RUN cd /rcssserver && \
     find . -type f -name "*.cpp" -exec sed -i 's/std::filesystem/std::experimental::filesystem/g' {} \; && \
     find . -type f -name "*.h" -exec sed -i 's/std::filesystem/std::experimental::filesystem/g' {} \; && \
     find . -type f -name "*.hpp" -exec sed -i 's/std::filesystem/std::experimental::filesystem/g' {} \; && \
-    ./bootstrap && \
     mkdir build && \
-    ./configure --prefix=/rcssserver/build && \
-    make -j$(nproc) && \
-    make install
+    cd build && \
+    cmake .. && \
+    make && \
+    cd ..
