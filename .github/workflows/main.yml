@@ -51,12 +51,6 @@ jobs:
     steps:
     
       - uses: actions/checkout@v4
-      
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
 
       # - name: Build app image on 18.04
       #   uses: docker/build-push-action@v5
@@ -75,12 +69,8 @@ jobs:
       
       
       - name: Build app image on 20.04
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./utils/appimage/Dockerfile.builder-2004
-          push: false
-          tags: "builder-image:2004"
+        run: |
+          docker build -t builder-image:2004 -f ./utils/appimage/Dockerfile.builder-2004 .
       
       - name: Build app image on 20.04
         run: |
