@@ -77,6 +77,8 @@ jobs:
           docker run --privileged \
             --name builder-2004 \
             builder-image:2004 /rcssserver/utils/appimage/build_appimage.sh
+          ls -la
+          docker cp builder-2004:/rcssserver/rcssserver-x86_64.appimage .
             
 
       - name: Build app image on 24.04
