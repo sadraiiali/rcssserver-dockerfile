@@ -26,6 +26,9 @@ RUN cd /rcssserver && \
     find . -type f -name "*.cpp" -exec sed -i 's/#include <filesystem>/#include <experimental\/filesystem>/g' {} \; && \
     find . -type f -name "*.h" -exec sed -i 's/#include <filesystem>/#include <experimental\/filesystem>/g' {} \; && \
     find . -type f -name "*.hpp" -exec sed -i 's/#include <filesystem>/#include <experimental\/filesystem>/g' {} \; && \
+    find . -type f -name "*.cpp" -exec sed -i 's/std::filesystem/std::experimental::filesystem/g' {} \; && \
+    find . -type f -name "*.h" -exec sed -i 's/std::filesystem/std::experimental::filesystem/g' {} \; && \
+    find . -type f -name "*.hpp" -exec sed -i 's/std::filesystem/std::experimental::filesystem/g' {} \; && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_CXX_STANDARD=17 .. && \
