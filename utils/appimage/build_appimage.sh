@@ -16,7 +16,12 @@ LIBRCSSCONFPARSER_PATH=$(ldd $BUILD_PWD/rcssserver | grep librcssconfparser.so |
 LIBRCSSGZ_PATH=$(ldd $BUILD_PWD/rcssserver | grep librcssgz.so | awk '{ print $3 }')
 LIBRCSSNET_PATH=$(ldd $BUILD_PWD/rcssserver | grep librcssnet.so | awk '{ print $3 }')
 
-tree /rcssserver
+echo "LIBSTDCPP_PATH=" $LIBSTDCPP_PATH
+echo "LIBZ_PATH=" $LIBZ_PATH
+echo "LIBRCSSCLANGPARSER_PATH=" $LIBRCSSCLANGPARSER_PATH
+echo "LIBRCSSCONFPARSER_PATH=" $LIBRCSSCONFPARSER_PATH
+echo "LIBRCSSGZ_PATH=" $LIBRCSSGZ_PATH
+echo "LIBRCSSNET_PATH=" $LIBRCSSNET_PATH
 
 ./linuxdeploy-x86_64.AppImage --appdir ./rcssserver-x86_64 \
                                 -e $BUILD_PWD/rcssserver \
