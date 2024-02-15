@@ -52,19 +52,19 @@ jobs:
     
       - uses: actions/checkout@v4
 
-      # - name: Build app image on 18.04
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: .
-      #     file: ./utils/appimage/Dockerfile.builder-1804
-      #     push: false
-      #     tags: "builder-image:1804"
+      - name: Build app image on 18.04
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./utils/appimage/Dockerfile.builder-1804
+          push: false
+          tags: "builder-image:1804"
 
-      # - name: Build app image on 18.04
-      #   run: |
-      #     docker run --privileged \
-      #       --name builder-1804 \
-      #       builder-image:1804 /rcssserver/utils/appimage/build_appimage.sh
+      - name: Build app image on 18.04
+        run: |
+          docker run --privileged \
+            --name builder-1804 \
+            builder-image:1804 /rcssserver/utils/appimage/build_appimage.sh
       
       
       
