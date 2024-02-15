@@ -36,3 +36,4 @@ echo "LIBRCSSNET_PATH=" $LIBRCSSNET_PATH
                                 -i $APP_IMAGE_DIR/rcssserver.png \
                                 --output appimage 
 echo "App Image Created."
+ls -la
