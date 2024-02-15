@@ -98,6 +98,6 @@ jobs:
         with:
           artifacts: "./rcssserver-x86_64*"
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: "${{ github.ref }}"
+          tag: "2"
 
           
