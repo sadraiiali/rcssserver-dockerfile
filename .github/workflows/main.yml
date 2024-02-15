@@ -81,19 +81,15 @@ jobs:
             
 
       - name: Build app image on 24.04
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./utils/appimage/Dockerfile.builder-2404
-          push: false
-          tags: "builder-image:2404"
+        run: |
+          docker build -t builder-image:2404 -f ./utils/appimage/Dockerfile.builder-2404 .
       
-
       - name: Build app image on 24.04
         run: |
           docker run --privileged \
             --name builder-2404 \
             builder-image:2404 /rcssserver/utils/appimage/build_appimage.sh
+          docker cp builder-2404:/rcssserver-x86_64.AppImage rcssserver-x86_64-2404.AppImage
             
 
       
