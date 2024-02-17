@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - "master"
+    tags:
+      - "*"
 
 env:
   BASE_IMAGE: sadraiiali/rcssserver
@@ -94,3 +96,6 @@ jobs:
           artifacts: "${{ github.workspace }}/artifact/*"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: "${{ github.ref }}"
+# for tag and push use : 
+# git tag -a v1.0.0 -m "v1.0.0"
+# git push origin v1.0.0
