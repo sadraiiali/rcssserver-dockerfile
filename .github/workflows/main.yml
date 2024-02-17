@@ -38,7 +38,7 @@ jobs:
           context: .
           file: ./utils/docker/Dockerfile
           push: true
-          tags: "${{ env.BASE_IMAGE }}:latest,${{ env.BASE_IMAGE }}:ubuntu-24-${{ github.ref }}"
+          tags: "${{ env.BASE_IMAGE }}:latest,${{ env.BASE_IMAGE }}:ubuntu-24-${{ github.ref_name }}"
 
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
@@ -95,7 +95,5 @@ jobs:
         with:
           artifacts: "${{ github.workspace }}/artifact/*"
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: "${{ github.ref }}"
-# for tag and push use : 
-# git tag -a v1.0.0 -m "v1.0.0"
-# git push origin v1.0.0
+          # tag text is like "v1.2.3" so we need to remove the "v" from the tag
+          tag: "${{ github.ref_name }}"
