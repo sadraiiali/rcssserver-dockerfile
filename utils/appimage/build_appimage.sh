@@ -5,8 +5,9 @@ wget -c "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous
 chmod +x linuxdeploy-x86_64.AppImage
 mkdir rcssserver-x86_64
 
-BUILD_PWD='/rcssserver/build'
-APP_IMAGE_DIR='/rcssserver/utils/appimage'
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+BUILD_PWD="${SCRIPT_DIR}/../../build"
+APP_IMAGE_DIR="${SCRIPT_DIR}"
 
 
 # find libc and libstdc++ libz dependencies
