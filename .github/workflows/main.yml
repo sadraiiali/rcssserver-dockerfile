@@ -3,19 +3,21 @@ name: ci
 on:
   push:
     branches:
-      - "master"
+      - "*"
     tags:
       - "*"
 
 env:
   BASE_IMAGE: sadraiiali/rcssserver
   BASE_TAG: latest
+  RELEASE_PREFIX: "rcssserver-"
 
 jobs:
+      
   docker:
     runs-on: ubuntu-latest
     name: Build & Push Docker
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,13 +34,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Find CMakeLists.txt version
+        id: cmake_version
+        run: |
+          cmake_version=$(grep -oP 'project\(.* VERSION \K[0-9]+\.[0-9]+\.[0-9]+' CMakeLists.txt)
+          echo "version=${cmake_version}" >> $GITHUB_OUTPUT
+
       - name: Build and push RCSSServer
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./utils/docker/Dockerfile
           push: true
-          tags: "${{ env.BASE_IMAGE }}:latest,${{ env.BASE_IMAGE }}:ubuntu-24-${{ github.ref_name }}"
+          tags: "${{ env.BASE_IMAGE }}:latest,${{ env.BASE_IMAGE }}:ubuntu-24-${{ steps.cmake_version.outputs.version }}"
 
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
@@ -59,6 +67,12 @@ jobs:
         run: |
           mkdir -p ${{ github.workspace }}/artifact
 
+      - name: Find CMakeLists.txt version
+        id: cmake_version
+        run: |
+          cmake_version=$(grep -oP 'project\(.* VERSION \K[0-9]+\.[0-9]+\.[0-9]+' CMakeLists.txt)
+          echo "version=${cmake_version}" >> $GITHUB_OUTPUT
+          
       # ------------------------------------------- Ubuntu 20.04 AppImage
       - name: Prepare builder image for 20.04
         run: |
@@ -68,18 +82,7 @@ jobs:
         run: |
           docker run --privileged --name builder-2004 \
             builder-image:2004 /rcssserver/utils/appimage/build_appimage.sh
-          docker cp builder-2004:/rcssserver-x86_64.AppImage ${{ github.workspace }}/artifact/rcssserver-x86_64-2004.AppImage
-
-      # ------------------------------------------- Ubuntu 24.04 AppImage
-      - name: Prepare builder image for 24.04
-        run: |
-          docker build -t builder-image:2404 -f ./utils/appimage/Dockerfile.builder-2404 .
-
-      - name: Build app image on 24.04
-        run: |
-          docker run --privileged --name builder-2404 \
-            builder-image:2404 /rcssserver/utils/appimage/build_appimage.sh
-          docker cp builder-2404:/rcssserver-x86_64.AppImage ${{ github.workspace }}/artifact/rcssserver-x86_64-2404.AppImage
+          docker cp builder-2004:/rcssserver-x86_64.AppImage ${{ github.workspace }}/artifact/rcssserver-${{ steps.cmake_version.outputs.version }}-x86_64.AppImage
 
       # ------------------------------------------- Artifact
       - name: Upload Artifact
@@ -88,12 +91,22 @@ jobs:
           name: rcssserver-x86_64
           path: ${{ github.workspace }}/artifact/*
           retention-days: 5
+        
+      - name: Check if there is no release with the same tag
+        id: check_release
+        run: |
+          out=$(curl -s -o /dev/null -w "%{http_code}" https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ steps.cmake_version.outputs.version }})
+          echo "release_exists=${out}" >> $GITHUB_OUTPUT
+
 
       # ------------------------------------------- Release
-      - uses: ncipollo/release-action@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Create Release
+        if: ${{ steps.check_release.outputs.release_exists == '404' }}
+        id: create_release
+        uses: ncipollo/release-action@v1
         with:
-          artifacts: "${{ github.workspace }}/artifact/*"
+          artifacts: "${{ github.workspace }}/artifact/rcssserver-${{ steps.cmake_version.outputs.version }}-x86_64.AppImage"
           token: ${{ secrets.GITHUB_TOKEN }}
-          # tag text is like "v1.2.3" so we need to remove the "v" from the tag
-          tag: "${{ github.ref_name }}"
+          bodyFile: "${{ github.workspace }}/artifact/release_note"
+          name: "${{ env.RELEASE_PREFIX }}${{ steps.cmake_version.outputs.version }}"
+          tag: ${{ steps.cmake_version.outputs.version }}
