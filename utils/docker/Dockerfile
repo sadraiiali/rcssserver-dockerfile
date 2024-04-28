@@ -29,7 +29,8 @@ RUN apt-get clean && apt-get update --allow-insecure-repositories && \
     iputils-ping
 
 # copy rcssserver source code
-COPY . /rcssserver
+#COPY [ "./src", "./rcss", "./m4", "config*","Make*" , "CMake*", "/rcssserver/"]
+COPY . /rcssserver/
 
 # make and install rcssserver
 RUN cd /rcssserver/ \

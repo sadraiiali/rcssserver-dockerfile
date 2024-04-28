@@ -17,11 +17,7 @@ Now you can connect to the server using the monitor or a client.
 ```bash
 docker run --name rcssserver --network host -v /path/to/your/configs:/root/.rcssserver -it rcssserver:latest
 ```
-2. You can add your custom configuration as environment variables, like:
-```bash
-docker run --name rcssserver --network host -e 'synch_mode=true' -it rcssserver:latest
-``` 
-3. You can run server with custom command line arguments, like:
+2. You can run server with custom command line arguments, like:
 ```bash
 docker run --name rcssserver --network host -it rcssserver:latest rcssserver server::synch_mode=true
 
